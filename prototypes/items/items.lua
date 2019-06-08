@@ -11,6 +11,28 @@ ITEM {
 
 ITEM {
     type = "item",
+    name = "wastegas",
+    icon = "__pycoalprocessing__/graphics/icons/wastegas.png",
+    icon_size = 32,
+    flags = {},
+    subgroup = "py-items",
+    order = "wastegas",
+    stack_size = 1000
+}
+
+--ITEM {
+--    type = "item",
+--    name = "wastefluid",
+--    icon = "__pycoalprocessing__/graphics/icons/wastefluid.png",
+--    icon_size = 32,
+--   flags = {},
+--    subgroup = "py-items",
+--    order = "wastefluid",
+--    stack_size = 1000
+--}
+
+ITEM {
+    type = "item",
     name = "chromium",
     icon = "__pycoalprocessing__/graphics/icons/chromium.png",
     icon_size = 32,
