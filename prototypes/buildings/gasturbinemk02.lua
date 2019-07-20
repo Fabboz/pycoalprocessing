@@ -36,8 +36,8 @@ ENTITY {
     minable = {mining_time = 1, result = "gasturbinemk02"},
     max_health = 500,
     corpse = "big-remnants",
-    effectivity = 0.95,
-    fluid_usage_per_tick = 0.2,
+    effectivity = 0.75,
+    fluid_usage_per_tick = 0.5,
     maximum_temperature = 1000,
     resistances = {
         {

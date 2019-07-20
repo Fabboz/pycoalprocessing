@@ -23,7 +23,7 @@ FLUID {
     icon = "__pycoalprocessing__/graphics/icons/combustion-mixture2.png",
     icon_size = 32,
     default_temperature = 15,
-    heat_capacity = "1KJ",
+    heat_capacity = "0.15KJ",
     base_color = {r = 0.811, g = 0.325, b = 0.0},
     flow_color = {r = 0.811, g = 0.325, b = 0.0},
     max_temperature = 100,
