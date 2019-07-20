@@ -37,7 +37,7 @@ ENTITY {
     max_health = 500,
     corpse = "big-remnants",
     effectivity = 0.95,
-    fluid_usage_per_tick = 1,
+    fluid_usage_per_tick = 0.2,
     maximum_temperature = 1000,
     resistances = {
         {
@@ -67,7 +67,7 @@ ENTITY {
     energy_source = {
         type = "electric",
         usage_priority = "secondary-output",
-        emissions_per_minute = 1,
+        emissions_per_minute = 20,
     },
     horizontal_animation = {
         filename = "__pycoalprocessing__/graphics/entity/gas-turbinemk02/gas-turbine-mk02-vertical-anim.png",
