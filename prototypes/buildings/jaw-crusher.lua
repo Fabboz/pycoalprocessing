@@ -40,6 +40,7 @@ ENTITY {
     dying_explosion = "medium-explosion",
     collision_box = {{-3.3, -3.3}, {3.3, 3.3}},
     selection_box = {{-3.5, -3.5}, {3.5, 3.5}},
+    match_animation_speed_to_activity = false,
     module_specification = {
         module_slots = 2
     },
@@ -62,7 +63,7 @@ ENTITY {
                 line_length = 21,
                 frame_count = 161,
                 shift = {-2.0, -0.5},
-                animation_speed = 0.9
+                animation_speed = 0.5
             },
             {
                 filename = "__pycoalprocessing__/graphics/entity/jaw-crusher/sprite-mid.png",
@@ -71,7 +72,7 @@ ENTITY {
                 line_length = 21,
                 frame_count = 161,
                 shift = {1.0, -0.5},
-                animation_speed = 0.9
+                animation_speed = 0.5
             },
             {
                 filename = "__pycoalprocessing__/graphics/entity/jaw-crusher/sprite-right.png",
@@ -80,7 +81,7 @@ ENTITY {
                 line_length = 64,
                 frame_count = 161,
                 shift = {3.0, -0.5},
-                animation_speed = 0.9
+                animation_speed = 0.5
             }
         }
     },

@@ -46,6 +46,8 @@ local function new_pond_data(entity)
     }
 end
 
+local tickdoubler = 1
+
 --As the tailings pond get full they leak out and start polluting the ground around them
 --Scorch up to 6 tiles from center.
 local function scorch_earth(pond, tick)
@@ -84,11 +86,19 @@ local function scorch_earth(pond, tick)
                 --moving set tiles to a seperate function to spread tile change load over ticks.
                 --needs stdlib adjusts to use std tick spreader. proof of concept at the moment
                 end -- polluting liquids
-            end -- Full Pond
+			end
         else -- not full fluid
             pond.fluid_per = tonumber(string.format('%.3f', (fluid.amount / tanksize)))
-        end
-    else -- no fluid
+		end
+		if tickdoubler == 1 then -- Full Pond
+			if fluid.amount >= 100 then
+				fluid.amount = fluid.amount-10
+			end
+			--pond.fluid_per = 0.99
+			pond.full = nil
+			tickdoubler = tickdoubler * -1
+		end
+	else -- no fluid
         pond.fluid_per = 0
     end
     --push the updated fluidbox to the entity.
