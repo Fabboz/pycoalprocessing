@@ -10,14 +10,13 @@ local _scorch_chance = CFG.SCORCH_CHANCE
 local _scorch_ticks = CFG.SCORCH_TICKS
 local _pollution_mod = CFG.GAS_POLLUTE_MODIFIER
 
-local Tiles = {}
-
 --Pond contains gases, lets spill them out. Only negative is this can be used as a "gas" void so...
 --If the gas is "polluting" create pollution, else just vent.
 local function empty_pond_gas(fluid, surface, position)
     if fluid then
         if fluid.temperature >= game.fluid_prototypes[fluid.name].gas_temperature or (fluid.name:contains('-gas') or fluid.name:contains('gas-') and not _gasses[fluid.name] == false) or _gasses[fluid.name] == true then
             surface.pollute(position, fluid.amount * _pollution_mod)
+            game.pollution_statistics.on_flow("tailings-pond", fluid.amount * _pollution_mod)
             return nil
         elseif _gasses[fluid.name] == false then
             return nil
@@ -46,8 +45,6 @@ local function new_pond_data(entity)
     }
 end
 
-local tickdoubler = 1
-
 --As the tailings pond get full they leak out and start polluting the ground around them
 --Scorch up to 6 tiles from center.
 local function scorch_earth(pond, tick)
@@ -57,6 +54,7 @@ local function scorch_earth(pond, tick)
     local fluid = empty_pond_gas(fluidbox[1], pond.entity.surface, pond.entity.position)
 
     local tiles = {}
+	local tickdoubler = global.tickdoubler
 
     --No gasses left if we still have fluid
     if fluid then
@@ -103,6 +101,7 @@ local function scorch_earth(pond, tick)
     end
     --push the updated fluidbox to the entity.
     fluidbox[1] = fluid
+	global.tickdoubler = tickdoubler
     return tiles
 end
 
@@ -159,6 +158,8 @@ end
 
 --Run tick handler every 30 ticks. In the future this will need to be spread out to itereate over a queing system.
 function tailings_pond.on_tick(event)
+
+	local Tiles = global.Tiles
     --log(table_size(Tiles))
     local ponds = global.tailings_ponds
     for i, pond in pairs(ponds) do
@@ -178,7 +179,7 @@ function tailings_pond.on_tick(event)
         end
         --log(serpent.block(Tiles))
         --log(serpent.block(Tiles[1]))
-        if Tiles[1] ~= nil then
+        if Tiles ~= nil and Tiles[1] ~= nil then
             --log(serpent.block(table_size(Tiles)))
             local stiles
             stiles, Tiles = tile_setter(Tiles)
@@ -191,13 +192,23 @@ function tailings_pond.on_tick(event)
             end
         end
     end
+
+	global.Tiles = Tiles
 end
 Event.register(-30, tailings_pond.on_tick)
 
 function tailings_pond.on_init()
     global.tailings_ponds = {}
+	global.Tiles = {}
+	global.tickdoubler = 1
 end
 Event.register(Event.core_events.init, tailings_pond.on_init)
+
+function tailings_pond.on_load()
+	--global.Tiles = {}
+	--global.tickdoubler = 1
+end
+Event.register(Event.core_events.on_load, tailings_pond.on_load)
 
 function tailings_pond.on_entity_died(event)
     if event.entity.name == 'ninja-tree' then

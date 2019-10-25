@@ -205,7 +205,7 @@ RECIPE {
     energy_required = 5,
     ingredients = {
         {type = "fluid", name = "olefin", amount = 100},
-        {type = "item", name = "bonemeal", amount = 20}
+        {type = "item", name = "bonemeal", amount = 10}
     },
     results = {
         {type = "fluid", name = "organic-solvent", amount = 50}
@@ -333,7 +333,7 @@ RECIPE {
         {type = "fluid", name = "syngas", amount = 40}
     },
     results = {
-        {type = "fluid", name = "crude-oil", amount = 100} --bobs rubber
+        {type = "fluid", name = "crude-oil", amount = 70} --bobs rubber
     },
     icon = "__pycoalprocessing__/graphics/icons/aromatics-rubber.png",
     icon_size = 32,
